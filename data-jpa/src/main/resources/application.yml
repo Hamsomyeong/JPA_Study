@@ -1,18 +1,25 @@
 spring:
+  h2:
+    console:
+      enabled: true  # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
+      path: /h2-console  # H2 Console의 Path
+
   datasource:
-    url: jdbc:h2:tcp://localhost/~/datajpa
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    driver-class-name: org.h2.Driver  # Database를 H2로 사용하겠다.
+    url: jdbc:h2:~/datajpa  # H2 접속 정보
+    username: sa  # H2 접속 시 입력할 username 정보 (원하는 것으로 입력)
+    password:  # H2 접속 시 입력할 password 정보 (원하는 것으로 입력)
 
   jpa:
-    hibernate:
-      ddl-auto: create
+    database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
-        #show_sql: true -> sql 쿼리를 console로 찍음
         format_sql: true
+        show_sql: true #-> sql 쿼리를 console로 찍음
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
 
-logging:
-  level:
-    org.hibernate.sql: debug #-> sql 쿼리를 log로 찍음
+#logging.level:
+#    org.hibernate.SQL: debug #-> sql 쿼리를 log로 찍음
+#    org.hibernate.type: trace
